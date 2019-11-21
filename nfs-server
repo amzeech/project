@@ -1,0 +1,37 @@
+---
+- name: nfs server
+  hosts: vm3
+  tasks:
+    - name: selinux off
+      shell: "setenforce 0"
+    
+    - name: iptables off
+      service:
+        name: iptables
+        state: stopped
+        enabled: false
+   
+    - name: create dir 
+      file:
+        path: /root/nfsdata
+        state: directory
+        mode: 0777
+ 
+    - name: nfs-utils
+      yum: 
+        name: nfs-utils
+        state: present
+ 
+    - name: start service
+      service:
+        name: nfs
+        state: started
+    
+    - name: file config
+      lineinfile:
+        path: /etc/exports
+        line: /root/nfsdata *(rw,sync,no_root_squash)
+   
+    - name: export share
+      shell: "exportfs -a"
+

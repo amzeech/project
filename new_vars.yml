@@ -1,0 +1,31 @@
+---
+- name: installing packages and starting service
+  hosts: vm2
+  vars:
+    web_pkg: httpd
+    ntpd_pkg: ntp
+    ftp_pkg: vsftpd
+    web_service: httpd
+    ntpd_service: ntpd
+    ftpd_service: vsftpd
+
+  tasks: 
+    - name: required packages are installed and up to date
+      yum:
+        name: 
+          - "{{ web_pkg }}"
+          - "{{ ntpd_pkg }}"
+          - "{{ ftp_pkg }}"
+        state: latest
+
+    - name: starting services
+      service: 
+        name: "{{ item }}"
+        state: started
+      with_items:  
+          - "{{ web_service }}"
+          - "{{ ntpd_service }}"
+          - "{{ ftpd_service }}"
+
+    
+

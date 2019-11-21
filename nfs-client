@@ -1,0 +1,30 @@
+---
+- name: nfs client
+  hosts: vm2
+  tasks:
+    
+    - name: selinux off
+      shell: "setenforce 0"
+  
+    - name: iptables off
+      service:
+        name: iptables
+        state: stopped
+  
+    - name: install nfs
+      yum: 
+        name: nfs-utils
+        state: present
+  
+    - name: mounting
+      mount:
+        path: /mnt
+        src: vm3:/root/nfsdata
+        fstype: nfs
+        state: mounted
+   
+    - name: fstab
+      lineinfile: 
+        path: /etc/fstab
+        line: "vm3:/root/nfsdata /mnt nfs default 0 0"
+        

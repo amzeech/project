@@ -1,0 +1,26 @@
+---
+- name: installing nfs httpd vsftpd telnet
+  hosts: emran
+  vars: 
+    pack1: httpd
+    pack2: vsftpd
+    pack3: nfs-utils
+    pack4: telnet
+    svc1: nfs
+
+  tasks: 
+    - name: installing all packages
+      yum:
+        name: 
+          - "{{ pack1 }}"
+          - "{{ pack2 }}"
+          - "{{ pack3 }}"
+          - "{{ pack4 }}"
+        state: present
+
+    - name: starting services
+      service:
+        name: 
+          - "{{ pack1 }}"
+        state: started
+        enabled: true

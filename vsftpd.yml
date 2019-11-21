@@ -1,0 +1,15 @@
+---
+- name: Installing vsftpd 
+  hosts: emran
+  tasks:
+ 
+  - name: installing vsftpd
+    yum:
+      name: vsftpd
+      state: present
+      
+  - name: starting vsftpd
+    service: 
+      name: vsftpd
+      state: started
+      enabled: true

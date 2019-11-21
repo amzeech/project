@@ -1,0 +1,10 @@
+---
+- name: stopping vsftpd service
+  hosts: vm2
+  tasks:
+  
+  - name: stopping vsftpd
+    service:
+      name: vsftpd
+      state: stopped
+    
