@@ -1,0 +1,17 @@
+git config --global user.name "john smith"
+git config --global user.email "amzee@gmail.com"
+git config -l
+
+git clone (ssh path)
+git add ( staging)
+git commit -m "write comment"
+git status
+git commit -a (for staging and commiting together)
+git push origin master/testing 
+
+git branch testing  (create new branch)
+git branch          ( to see which branch are u in)
+git checkout testing  (to go into testing branch)
+git merge (if u want to merge with other branch)
+git log   (  to see commits)
+git push origin testing
